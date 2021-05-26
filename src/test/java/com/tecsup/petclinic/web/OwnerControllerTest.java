@@ -35,6 +35,7 @@ public class OwnerControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
+	//Obtiene todos los dueños
 	@Test
 	public void testGetOwners() throws Exception{
 		
@@ -47,6 +48,8 @@ public class OwnerControllerTest {
 					.andExpect(jsonPath("$[0].id", is(primer_owner)));
 	}
 	
+	
+	//Busca dueño que existe
 	@Test
 	public void testFindOwnerOK() throws Exception{
 		
@@ -62,6 +65,7 @@ public class OwnerControllerTest {
 		
 	}
 	
+	//Busca dueño que no existe
 	@Test
 	public void testFindOwnerKO() throws Exception{
 		
@@ -69,6 +73,7 @@ public class OwnerControllerTest {
 					.andExpect(status().isNotFound());
 	}
 	
+	//Crea el dueño
 	@Test
 	public void testCreateOwner() throws Exception{
 		
@@ -91,6 +96,7 @@ public class OwnerControllerTest {
 				.andExpect(jsonPath("$.telephone", is(telefono)));
 	}
 	
+	//Eliminar un dueño
 	@Test
 	public void testDeleteOwner() throws Exception{
 			
@@ -111,7 +117,7 @@ public class OwnerControllerTest {
 				
 				Integer id = JsonPath.parse(response).read("$.id");
 				
-				mockMvc.perform(delete("/pets/"+id))
+				mockMvc.perform(delete("/owners/"+id))
 						.andExpect(status().isOk());
 	}
 	
